@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+  backend:
+    build:
+      target: production-stage
+    container_name: backend
+    volumes:
+      - ./storage:/var/www/storage
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: nginx
+    ports:
+      - 80:80
+    depends_on:
+      - backend
